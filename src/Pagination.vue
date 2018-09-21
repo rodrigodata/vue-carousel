@@ -35,83 +35,90 @@
 
 <script>
 export default {
-   name: 'pagination',
-   inject: ['carousel'],
+  name: "pagination",
+  inject: ["carousel"],
 
-   computed: {
-      paginationCount() {
-         return this.carousel.scrollPerPage ? this.carousel.pageCount : this.carousel.slideCount - 2;
+  computed: {
+    paginationCount() {
+      return this.carousel.scrollPerPage
+        ? this.carousel.pageCount
+        : this.carousel.slideCount - 2;
+    }
+  },
+  methods: {
+    /**
+     * Change page by index
+     * @param {number} index
+     * return {void}
+     */
+    goToPage(index) {
+      /**
+       * @event paginationclick
+       * @type {number}
+       */
+      this.$emit("paginationclick", index);
+    },
+
+    /**
+     * Check on current dot
+     * @param {number} index - dot index
+     * @return {boolean}
+     */
+    isCurrentDot(index) {
+      return index === this.carousel.currentPage;
+    },
+
+    /**
+     * Enable custom horizontal and vertically padding for dots
+     * @return {string}
+     */
+    paginationPaddingDynamic() {
+      let padding = [];
+      padding[0],
+        padding[1],
+        padding[2],
+        (padding[3] = `${this.carousel.paginationPadding}px`);
+      if (this.carousel.paginationHorizontalPadding) {
+        padding[1],
+          (padding[3] = `${this.carousel.paginationHorizontalPadding}px`);
+      } else if (this.carousel.paginationVerticalPadding) {
+        padding[0],
+          (padding[2] = `${this.carousel.paginationVerticalPadding}px`);
       }
-   },
-   methods: {
-      /**
-       * Change page by index
-       * @param {number} index
-       * return {void}
-       */
-      goToPage(index) {
-         /**
-          * @event paginationclick
-          * @type {number}
-          */
-         this.$emit('paginationclick', index);
-      },
-
-      /**
-       * Check on current dot
-       * @param {number} index - dot index
-       * @return {boolean}
-       */
-      isCurrentDot(index) {
-         return index === this.carousel.currentPage;
-      },
-
-      /**
-       * Enable custom horizontal and vertically padding for dots
-       * @return {string}
-       */
-      paginationPaddingDynamic() {
-         let padding = [];
-         padding[0], padding[1], padding[2], (padding[3] = `${this.carousel.paginationPadding}px`);
-         if (this.carousel.paginationHorizontalPadding) {
-            padding[1], (padding[3] = `${this.carousel.paginationHorizontalPadding}px`);
-         } else if (this.carousel.paginationVerticalPadding) {
-            padding[0], (padding[2] = `${this.carousel.paginationVerticalPadding}px`);
-         }
-         return padding.filter(Boolean).join(',');
-      }
-   }
+      return padding.filter(Boolean).join(",");
+    }
+  }
 };
 </script>
 
 <style scoped>
 .VueCarousel-pagination {
-   width: 100%;
-   text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .VueCarousel-dot-container {
-   display: inline-block;
-   margin: 0 auto;
-   padding: 0;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .VueCarousel-dot {
-   display: inline-block;
-   cursor: pointer;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .VueCarousel-dot-button {
-   appearance: none;
-   border: none;
-   background-color: transparent;
-   padding: 0;
-   border-radius: 100%;
-   outline: none;
-   cursor: pointer;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 100%;
+  outline: none;
+  cursor: pointer;
 }
 
 .VueCarousel-dot-button:focus {
-   outline: 1px solid lightblue;
+  outline: 1px solid lightblue;
 }
 </style>
