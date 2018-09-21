@@ -1,10 +1,10 @@
 <template>
   <section class="VueCarousel">
-    <div 
+    <div
       class="VueCarousel-wrapper"
       ref="VueCarousel-wrapper"
     >
-      <div 
+      <div
         ref="VueCarousel-inner"
         :class="[
           'VueCarousel-inner',
@@ -26,12 +26,12 @@
       </div>
     </div>
 
-    <pagination 
+    <pagination
       v-if="paginationEnabled"
       @paginationclick="goToPage($event, 'pagination')"
     />
 
-    <navigation 
+    <navigation
       v-if="navigationEnabled && isNavigationRequired"
       :clickTargetSize="navigationClickTargetSize"
       :nextLabel="navigationNextLabel"
@@ -198,6 +198,22 @@ export default {
     paginationPadding: {
       type: Number,
       default: 10
+    },
+    /**
+     * Horizontal padding separately
+     * Pixel values are accepted
+     */
+    paginationHorizontalPadding: {
+      type: Number,
+      default: 0
+    },
+    /**
+     * Vertical padding separately
+     * Pixel values are accepted
+     */
+    paginationVerticalPadding: {
+      type: Number,
+      default: 0
     },
     /**
      * The size of each pagination dot
